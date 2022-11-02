@@ -14,7 +14,5 @@ puts "The Joker"
 puts "Joffrey Baratheon"
 puts "Norman Bates"
 # and then print the student count
-print "Overall, we have "
-# it's helpful that 'print' doesn't add a newline character
-print student_count
-puts " great students!"
+#print "Overall, we have #{student_count} great students!\n"
+puts "Overall, we have #{student_count} great students!"
