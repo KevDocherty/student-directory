@@ -13,6 +13,9 @@ students = [
   "Norman Bates"
 ]
 
+puts "The students of Villains Academy"
+puts "---------------"
+
 students.each do |student|
   puts student
 end
