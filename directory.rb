@@ -16,26 +16,39 @@ def input_students
   end
   # return the array of students
   students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker",cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
+    {name: "Dr. Hannibal Lecter", cohort: :november},
+    {name: "Darth Vader", cohort: :november},
+    {name: "Nurse Ratched", cohort: :november},
+    {name: "Michael Corleone", cohort: :november},
+    {name: "Alex DeLarge", cohort: :november},
+    {name: "The Wicked Witch of the West", cohort: :november},
+    {name: "Terminator", cohort: :november},
+    {name: "Freddy Krueger", cohort: :november},
+    {name: "The Joker", cohort: :november},
+    {name: "Joffrey Baratheon", cohort: :november},
+    {name: "Norman Bates", cohort: :november}
+  ]
 end
 
-def subset_students()
+def subset_students(students)
   puts "Input the first letter of the names of interest (blank if interested in all students): "
   letter = gets.chomp
   puts "Input the maximum length of name of interest (blank if interested in all students): "
   name_length = gets.chomp.to_i
-  return letter, name_length
+  
+  # student_subsets = false
+  '''if !letter.empty? || name_length > 0
+    student_subset = students
+    # student_subsets = true
+  end'''
+  student_subset = students
+  if !letter.empty?
+    student_subset = subset_by_first_letter(student_subset, letter)
+  end
+  if name_length > 0
+    student_subset = subset_by_name_length(student_subset, name_length)
+  end
+  return student_subset
 end
 
 def subset_by_first_letter(students, letter)
@@ -80,30 +93,23 @@ def print_footer(students)
 end
 
 students = input_students
-letter, name_length = subset_students()
+student_subset = subset_students(students)
 
 # puts name_length
 # puts name_length.class
-student_subsets = false
-if !letter.empty? || name_length > 0
-  student_subset = students
-  student_subsets = true
-end
-if !letter.empty?
-  student_subset = subset_by_first_letter(student_subset, letter)
-end
-if name_length > 0
-  student_subset = subset_by_name_length(student_subset, name_length)
-end
+
 
 print_header
 # if !letter.empty? || name_length > 0
 # if defined?(student_subset)
-if student_subsets
+'''if student_subsets
   print(student_subset)
   print_footer(student_subset)
 else
   print(students)
   print_footer(students)
-end
+end'''
+
+print(student_subset)
+print_footer(student_subset)
 
