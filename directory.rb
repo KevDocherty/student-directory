@@ -30,7 +30,13 @@ def input_students
 ]
 end
 
-# def subset_students()
+def subset_students()
+  puts "Input the first letter of the names of interest (blank if interested in all students): "
+  letter = gets.chomp
+  puts "Input the maximum length of name of interest (blank if interested in all students): "
+  name_length = gets.chomp.to_i
+  return letter, name_length
+end
 
 def subset_by_first_letter(students, letter)
   student_subset = []
@@ -74,10 +80,8 @@ def print_footer(students)
 end
 
 students = input_students
-puts "Input the first letter of the names of interest (blank if interested in all students): "
-letter = gets.chomp
-puts "Input the maximum length of name of interest (blank if interested in all students): "
-name_length = gets.chomp.to_i
+letter, name_length = subset_students()
+
 # puts name_length
 # puts name_length.class
 student_subsets = false
