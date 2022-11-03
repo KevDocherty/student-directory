@@ -18,6 +18,28 @@ def input_students
   students
 end
 
+def subset_by_first_letter(students, letter)
+  student_subset = []
+  students.each do |student|
+    if student[:name][0] == letter
+      student_subset << student
+    end
+  end
+  student_subset
+end
+
+def subset_by_name_length(students, name_length)
+  # if name_length > 0
+  student_subset = []
+  students.each do |student|
+    if student[:name].length <= name_length
+      # puts student[:name].length
+      student_subset << student
+    end
+  end
+  student_subset
+end
+
 def print_header
   puts "The students of Villains Academy"
   puts "---------------"
@@ -42,30 +64,23 @@ puts "Input the first letter of the names of interest (blank if interested in al
 letter = gets.chomp
 puts "Input the maximum length of name of interest (blank if interested in all students): "
 name_length = gets.chomp.to_i
-puts name_length
-puts name_length.class
-if !letter.empty? 
-  student_subset = []
-  students.each do |student|
-    if student[:name][0] == letter
-      student_subset << student
-    end
-  end
-  print(student_subset)
-  print_footer(student_subset)
-elsif name_length > 0
-  student_subset = []
-  students.each do |student|
-    if student[:name].length <= name_length
-      puts student[:name].length
-      student_subset << student
-    end
-  end
+# puts name_length
+# puts name_length.class
+if !letter.empty? || name_length > 0
+  student_subset = students
+end
+if !letter.empty?
+  student_subset = subset_by_first_letter(student_subset, letter)
+end
+if name_length > 0
+  student_subset = subset_by_name_length(student_subset, name_length)
+end
+
+print_header
+if student_subset.length > 0
   print(student_subset)
   print_footer(student_subset)
 else
-  print(student_subset)
-  print_footer(student_subset)
   print(students)
   print_footer(students)
 end
