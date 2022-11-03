@@ -80,8 +80,10 @@ puts "Input the maximum length of name of interest (blank if interested in all s
 name_length = gets.chomp.to_i
 # puts name_length
 # puts name_length.class
+student_subsets = false
 if !letter.empty? || name_length > 0
   student_subset = students
+  student_subsets = true
 end
 if !letter.empty?
   student_subset = subset_by_first_letter(student_subset, letter)
@@ -91,7 +93,9 @@ if name_length > 0
 end
 
 print_header
-if !letter.empty? || name_length > 0
+# if !letter.empty? || name_length > 0
+# if defined?(student_subset)
+if student_subsets
   print(student_subset)
   print_footer(student_subset)
 else
