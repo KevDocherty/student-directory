@@ -36,11 +36,6 @@ def subset_students(students)
   puts "Input the maximum length of name of interest (blank if interested in all students): "
   name_length = gets.chomp.to_i
   
-  # student_subsets = false
-  '''if !letter.empty? || name_length > 0
-    student_subset = students
-    # student_subsets = true
-  end'''
   student_subset = students
   if !letter.empty?
     student_subset = subset_by_first_letter(student_subset, letter)
@@ -62,11 +57,9 @@ def subset_by_first_letter(students, letter)
 end
 
 def subset_by_name_length(students, name_length)
-  # if name_length > 0
   student_subset = []
   students.each do |student|
     if student[:name].length <= name_length
-      # puts student[:name].length
       student_subset << student
     end
   end
@@ -80,11 +73,8 @@ end
 
 def print(students)
   # puts "Will print students whose name begins with a given letter: "
-  # letter = gets.chomp
   students.each_with_index do |student, index|
-    # if student[:name][0] == letter
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    # end
   end
 end
 
@@ -94,22 +84,6 @@ end
 
 students = input_students
 student_subset = subset_students(students)
-
-# puts name_length
-# puts name_length.class
-
-
-print_header
-# if !letter.empty? || name_length > 0
-# if defined?(student_subset)
-'''if student_subsets
-  print(student_subset)
-  print_footer(student_subset)
-else
-  print(students)
-  print_footer(students)
-end'''
-
 print(student_subset)
 print_footer(student_subset)
 
