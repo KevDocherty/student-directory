@@ -75,7 +75,7 @@ def print(students)
   # puts "Will print students whose name begins with a given letter: "
   # students.each_with_index do |student, index|
   index = 0
-  while index < students.length
+  until index == students.length
     # puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
     puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
     index += 1
