@@ -15,8 +15,22 @@ def input_students
     name = gets.chomp
   end
   # return the array of students
-  students
+  students = [
+  {name: "Dr. Hannibal Lecter", cohort: :november},
+  {name: "Darth Vader", cohort: :november},
+  {name: "Nurse Ratched", cohort: :november},
+  {name: "Michael Corleone", cohort: :november},
+  {name: "Alex DeLarge", cohort: :november},
+  {name: "The Wicked Witch of the West", cohort: :november},
+  {name: "Terminator", cohort: :november},
+  {name: "Freddy Krueger", cohort: :november},
+  {name: "The Joker",cohort: :november},
+  {name: "Joffrey Baratheon", cohort: :november},
+  {name: "Norman Bates", cohort: :november}
+]
 end
+
+# def subset_students()
 
 def subset_by_first_letter(students, letter)
   student_subset = []
@@ -77,10 +91,11 @@ if name_length > 0
 end
 
 print_header
-if student_subset.length > 0
+if !letter.empty? || name_length > 0
   print(student_subset)
   print_footer(student_subset)
 else
   print(students)
   print_footer(students)
 end
+
