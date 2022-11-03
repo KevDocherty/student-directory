@@ -38,8 +38,12 @@ def print_footer(students)
 end
 
 students = input_students
-puts "Input the first letter of the names of interest (blank if interested in all students: "
+puts "Input the first letter of the names of interest (blank if interested in all students): "
 letter = gets.chomp
+puts "Input the maximum length of name of interest (blank if interested in all students): "
+name_length = gets.chomp.to_i
+puts name_length
+puts name_length.class
 if !letter.empty? 
   student_subset = []
   students.each do |student|
@@ -49,7 +53,19 @@ if !letter.empty?
   end
   print(student_subset)
   print_footer(student_subset)
-else 
+elsif name_length > 0
+  student_subset = []
+  students.each do |student|
+    if student[:name].length <= name_length
+      puts student[:name].length
+      student_subset << student
+    end
+  end
+  print(student_subset)
+  print_footer(student_subset)
+else
+  print(student_subset)
+  print_footer(student_subset)
   print(students)
   print_footer(students)
 end
