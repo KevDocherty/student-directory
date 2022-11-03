@@ -89,15 +89,8 @@ end
 def print(students)
   # puts "Will print students whose name begins with a given letter: "
   students.each_with_index do |student, index|
-  # index = 0
-  # until index == students.length
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(75)
     puts "\n"
-    # student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
-    #student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)}"
-    # puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
-    # puts student_details.center(75)
-    # index += 1
   end
 end
 
@@ -106,20 +99,15 @@ def print_students_by_cohort(students)
   students.each do |student|
   
     cohort = student[:cohort].to_s
-    #puts cohort
-    #puts cohort.class
     if !cohorts.include? cohort
       cohorts << cohort
     end
   end
-#puts cohorts
-#puts cohorts.length
 
   cohorts.each do |cohort|
     puts "This is the #{cohort} cohort:".center(75)
     puts "-----------------------------".center(75)
     students.each do |student|
-    #cohort_sym = cohort.to_sym
       if student[:cohort].to_s == cohort
         puts student[:name].center(75)
       end
@@ -139,26 +127,4 @@ students = input_students
 student_subset = subset_students(students)
 print(student_subset)
 print_students_by_cohort(student_subset)
-
 print_footer(student_subset)
-
-
-
-  #student.each do |key, value|
-    
-    #name = 
-    #if key == ':cohort'
-    #   puts student[key]
-    #end
-    #puts key
-    #puts value
-    #end
-  '''for i in 1..word.length
-    # puts word[i-1]
-    letter = word[i - 1]
-    if letter == " " 
-      score += 0
-    elsif value.include? letter
-      score += key
-    end'''
-  #end
