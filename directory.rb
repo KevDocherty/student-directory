@@ -24,8 +24,12 @@ def print_header
 end
 
 def print(students)
+  # puts "Will print students whose name begins with a given letter: "
+  # letter = gets.chomp
   students.each_with_index do |student, index|
+    # if student[:name][0] == letter
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    # end
   end
 end
 
@@ -34,6 +38,18 @@ def print_footer(students)
 end
 
 students = input_students
-print_header
-print(students)
-print_footer(students)
+puts "Input the first letter of the names of interest (blank if interested in all students: "
+letter = gets.chomp
+if !letter.empty? 
+  student_subset = []
+  students.each do |student|
+    if student[:name][0] == letter
+      student_subset << student
+    end
+  end
+  print(student_subset)
+  print_footer(student_subset)
+else 
+  print(students)
+  print_footer(students)
+end
