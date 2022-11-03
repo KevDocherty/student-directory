@@ -1,20 +1,5 @@
 # first, we print the list of students
-def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit <return> twice"
-  # create an empty array
-  students = []
-  # get the first name
-  name = gets.chomp
-  # while the name is not empty, repeat this code...
-  while !name.empty? do
-    # add the student hash to the array
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    # get another name from the user
-    name = gets.chomp
-  end
-  # return the array of students
+def students_hard_coded
   students = [
     {name: "Dr. Hannibal Lecter", cohort: :november, hobies: "darts, farting"},
     {name: "Darth Vader", cohort: :november, hobies:  "darts, farting"},
@@ -28,6 +13,32 @@ def input_students
     {name: "Joffrey Baratheon", cohort: :november, hobies:  "darts, farting"},
     {name: "Norman Bates", cohort: :november, hobies:  "darts, farting"}
   ]
+  puts "Here are our students: "
+  puts students
+  return students
+end
+
+def input_students
+  puts "Here enter the names and cohort of a student"
+  puts "To finish, just hit <return> twice"
+  # create an empty array
+  students = []
+  while true do
+    puts "Please enter the name of a student"
+    name = gets.chomp
+    if name.empty?
+      break
+    end
+    puts "And, their cohort?"
+    cohort = gets.chomp.to_sym()
+    if cohort.empty?
+      cohort = "nov".to_sym()
+    end
+    # add the student hash to the array
+    students << {name: name, cohort: cohort}
+    puts "Now we have #{students.count} students"
+  end
+  return students
 end
 
 def subset_students(students)
@@ -73,22 +84,25 @@ end
 
 def print(students)
   # puts "Will print students whose name begins with a given letter: "
-  # students.each_with_index do |student, index|
-  index = 0
-  until index == students.length
-    # puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
+  students.each_with_index do |student, index|
+  # index = 0
+  # until index == students.length
+    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(75)
+    # student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
+    #student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)}"
     # puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
-    puts student_details.center(75)
-    index += 1
+    # puts student_details.center(75)
+    # index += 1
   end
 end
 
 def print_footer(students)
-  puts "\nOverall, we have #{students.count} great students!"
+  puts "\n"
+  puts "Overall, we have #{students.count} great students!".center(75)
 end
 
-students = input_students
+students = students_hard_coded
+#students = input_students
 student_subset = subset_students(students)
 print(student_subset)
 print_footer(student_subset)
