@@ -16,17 +16,17 @@ def input_students
   end
   # return the array of students
   students = [
-    {name: "Dr. Hannibal Lecter", cohort: :november},
-    {name: "Darth Vader", cohort: :november},
-    {name: "Nurse Ratched", cohort: :november},
-    {name: "Michael Corleone", cohort: :november},
-    {name: "Alex DeLarge", cohort: :november},
-    {name: "The Wicked Witch of the West", cohort: :november},
-    {name: "Terminator", cohort: :november},
-    {name: "Freddy Krueger", cohort: :november},
-    {name: "The Joker", cohort: :november},
-    {name: "Joffrey Baratheon", cohort: :november},
-    {name: "Norman Bates", cohort: :november}
+    {name: "Dr. Hannibal Lecter", cohort: :november, hobies: "darts, farting"},
+    {name: "Darth Vader", cohort: :november, hobies:  "darts, farting"},
+    {name: "Nurse Ratched", cohort: :november, hobies:  "darts, farting"},
+    {name: "Michael Corleone", cohort: :november, hobies:  "darts, farting"},
+    {name: "Alex DeLarge", cohort: :november, hobies:  "darts, farting"},
+    {name: "The Wicked Witch of the West", cohort: :november, hobies: "darts, farting"},
+    {name: "Terminator", cohort: :november, hobies: "darts, farting"},
+    {name: "Freddy Krueger", cohort: :november, hobies: "darts, farting"},
+    {name: "The Joker", cohort: :november, hobies:  "darts, farting"},
+    {name: "Joffrey Baratheon", cohort: :november, hobies:  "darts, farting"},
+    {name: "Norman Bates", cohort: :november, hobies:  "darts, farting"}
   ]
 end
 
@@ -77,13 +77,15 @@ def print(students)
   index = 0
   until index == students.length
     # puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
+    student_details = "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
+    # puts "#{index+1}. #{students[index][:name]} (#{students[index][:cohort]} cohort) - hobies: #{students[index][:hobies]}"
+    puts student_details.center(75)
     index += 1
   end
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students!"
+  puts "\nOverall, we have #{students.count} great students!"
 end
 
 students = input_students
