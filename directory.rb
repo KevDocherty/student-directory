@@ -25,13 +25,26 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  #file = File.open("students.csv", "r")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
+end
+
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # exit out of method if no filename provided
+  if File.exist?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry #{filename} doesn't exist, loaded from default file instead"
+    exit
+  end
 end
 
 def process(selection)
@@ -43,7 +56,7 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      load_students
+      try_load_students
     when "9"
       exit
     else
@@ -171,7 +184,8 @@ def print_students_by_cohort
     puts "-----------------------------"
     @students.each do |student|
       if student[:cohort].to_s == cohort
-        puts student[:name].center(75)
+        #puts student[:name].center(75)
+        puts student[:name]
       end
     end
     puts "\n"
