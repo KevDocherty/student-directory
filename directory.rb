@@ -16,10 +16,8 @@ end
 def process(selection)
   case selection
     when "1"
-      # input the students
       @students = input_students
     when "2"
-      # display the students
       show_students
     when "9"
       exit
@@ -29,19 +27,12 @@ def process(selection)
 end
 
 def interactive_menu
-  #students = []
   loop do
-    # print menu and ask user what to do
     print_menu
-    # read the input and save to a variable
-    selection = gets.chomp
-    # execute the user request
-    process(selection)
+    process(gets.chomp)
   end
 end
 
-
-# first, we print the list of students
 def students_hard_coded
   students = [
     {name: "Dr. Hannibal Lecter", cohort: :november, hobies: "darts, farting"},
@@ -125,8 +116,8 @@ def subset_by_name_length(students, name_length)
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "---------------"
+  puts "The students of Villains Academy".center(75)
+  puts "---------------".center(75)
 end
 
 def print_students
