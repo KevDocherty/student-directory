@@ -4,6 +4,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Display the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the students form students.csv"
   puts "9. Exit"
   puts "\n"
 end
@@ -24,6 +25,15 @@ def save_students
   file.close
 end
 
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(',')
+    @students << {name: name, cohort: cohort.to_sym}
+  end
+  file.close
+end
+
 def process(selection)
   case selection
     when "1"
@@ -32,6 +42,8 @@ def process(selection)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -43,6 +55,7 @@ def interactive_menu
   loop do
     print_menu
     process(gets.chomp)
+    puts "\n"
   end
 end
 
@@ -60,7 +73,7 @@ def students_hard_coded
     {name: "Joffrey Baratheon", cohort: :november, hobies:  "darts, farting"},
     {name: "Norman Bates", cohort: :june, hobies:  "darts, farting"}
   ]
-  puts "Here are our students: "
+  puts "\nHere are our students: "
   puts students
   return students
 end
@@ -129,16 +142,18 @@ def subset_by_name_length(students, name_length)
 end
 
 def print_header
-  puts "The students of Villains Academy".center(75)
-  puts "---------------".center(75)
+  #puts "The students of Villains Academy".center(75)
+  puts "\nThe students of Villains Academy"
+  puts "--------------------------------"
 end
 
 def print_students
   # puts "Will print students whose name begins with a given letter: "
   @students.each_with_index do |student, index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(75)
-    puts "\n"
+    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    #puts "\n"
   end
+  puts "\n"
 end
 
 def print_students_by_cohort
@@ -152,8 +167,8 @@ def print_students_by_cohort
   end
 
   cohorts.each do |cohort|
-    puts "This is the #{cohort} cohort:".center(75)
-    puts "-----------------------------".center(75)
+    puts "This is the #{cohort} cohort:"
+    puts "-----------------------------"
     @students.each do |student|
       if student[:cohort].to_s == cohort
         puts student[:name].center(75)
@@ -166,7 +181,7 @@ end
 
 def print_footer
   puts "\n"
-  puts "Overall, we have #{@students.count} great students!".center(75)
+  puts "Overall, we have #{@students.count} great students!"
   puts "\n"
 end
 
