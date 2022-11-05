@@ -4,12 +4,28 @@ def print_menu
   puts "1. Input the students"
   puts "2. Display the students"
   puts "9. Exit"
+  puts "\n"
 end
 
 def show_students
   print_header
   print_students
   print_footer
+end
+
+def process(selection)
+  case selection
+    when "1"
+      # input the students
+      @students = input_students
+    when "2"
+      # display the students
+      show_students
+    when "9"
+      exit
+    else
+      puts "I don't recognise that choice - try again"
+  end
 end
 
 def interactive_menu
@@ -20,18 +36,7 @@ def interactive_menu
     # read the input and save to a variable
     selection = gets.chomp
     # execute the user request
-    case selection
-      when "1"
-        # input the students
-        @students = input_students
-      when "2"
-        # display the students
-        show_students
-      when "9"
-        exit
-      else
-        puts "I don't recognise that choice - try again"
-    end
+    process(selection)
   end
 end
 
