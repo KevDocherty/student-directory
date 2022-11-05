@@ -1,3 +1,39 @@
+def print_menu
+  puts "1. Input the students"
+  puts "2. Display the students"
+  puts "9. Exit"
+end
+
+def show_students(students)
+  print_header
+  print(students)
+  print_footer(students)
+end
+
+def interactive_menu
+  students = []
+  loop do
+    # print menu and ask user what to do
+    print_menu
+    # read the input and save to a variable
+    selection = gets.chomp
+    # execute the user request
+    case selection
+      when "1"
+        # input the students
+        students = input_students
+      when "2"
+        # display the students
+        show_students(students)
+      when "9"
+        exit
+      else
+        puts "I don't recognise that choice - try again"
+    end
+  end
+end
+
+
 # first, we print the list of students
 def students_hard_coded
   students = [
@@ -120,11 +156,14 @@ end
 def print_footer(students)
   puts "\n"
   puts "Overall, we have #{students.count} great students!".center(75)
+  puts "\n"
 end
 
 #students = students_hard_coded
-students = input_students
-student_subset = subset_students(students)
-print(student_subset)
-print_students_by_cohort(student_subset)
-print_footer(student_subset)
+#students = input_students
+#student_subset = subset_students(students)
+#print(student_subset)
+#print_students_by_cohort(student_subset)
+#print_footer(student_subset)
+
+interactive_menu
