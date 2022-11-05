@@ -177,7 +177,6 @@ def print_students_by_cohort
     puts "\n"
   end
 end
-  
 
 def print_footer
   puts "\n"
