@@ -4,7 +4,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Display the students"
   puts "3. Save the list to students.csv"
-  puts "4. Load the students form students.csv"
+  puts "4. Load the students from students.csv"
   puts "9. Exit"
   puts "\n"
 end
@@ -28,10 +28,10 @@ end
 def load_students(filename = "students.csv")
   #file = File.open("students.csv", "r")
   file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
-  end
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      @students << {name: name, cohort: cohort.to_sym}
+    end
   file.close
 end
 
@@ -40,10 +40,11 @@ def try_load_students
   return if filename.nil? # exit out of method if no filename provided
   if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
+    puts "Loaded #{@students.count} from #{filename}\n"
   else
-    puts "Sorry #{filename} doesn't exist, loaded from default file instead"
-    exit
+    puts "\nSorry #{filename} doesn't exist!\n\n"
+    #exit
+    return
   end
 end
 
@@ -56,7 +57,7 @@ def process(selection)
     when "3"
       save_students
     when "4"
-      try_load_students
+      load_students
     when "9"
       exit
     else
@@ -67,7 +68,10 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    #selection = STDIN.gets.chomp
+    #puts "selection = #{selection}"
+    process(STDIN.gets.chomp)
+    #process(selection)
     puts "\n"
   end
 end
@@ -98,12 +102,12 @@ def input_students
   students = []
   while true do
     puts "Please enter the name of a student"
-    name = gets.chomp
+    name = STDIN.gets.chomp
     if name.empty?
       break
     end
     puts "And, their cohort?"
-    cohort = gets.chomp.to_sym()
+    cohort = STDIN.gets.chomp.to_sym()
     if cohort.empty?
       cohort = "nov".to_sym()
     end
@@ -120,9 +124,9 @@ end
 
 def subset_students
   puts "Input the first letter of the names of interest (blank if interested in all students): "
-  letter = gets.chomp
+  letter = STDIN.gets.chomp
   puts "Input the maximum length of name of interest (blank if interested in all students): "
-  name_length = gets.chomp.to_i
+  name_length = STDIN.gets.chomp.to_i
   
   student_subset = @students
   if !letter.empty?
@@ -205,4 +209,5 @@ end
 #print_students_by_cohort(student_subset)
 #print_footer(student_subset)
 
+try_load_students
 interactive_menu
