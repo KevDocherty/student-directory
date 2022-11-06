@@ -25,13 +25,25 @@ end
 
 def save_students
   #filename = get_filename
-  file = File.open(@DefaultFile, "w")
+  filename = @DefaultFile
+  #file = File.open(@DefaultFile, "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(", ")
-    file.puts csv_line
+    new_line = student_data.join(", ")
+    #file.puts csv_line
+    File.write(filename, new_line + "\n", mode: 'a')
+    #File.write(filename, "\n")
   end
-  file.close
+  #file.close
+  #File.foreach(filename) do 
+   # @students.each do |student|
+      #student_data = [student[:name], student[:cohort]]
+      #new_line = student_data.join(", ")
+      #File.write(filename, new_line,mode: 'a')
+      #filename.puts csv_line
+    #end
+  #end
+  #end
   puts "Students successfully added to file.\n"
 end
 
@@ -48,13 +60,18 @@ def load_students(filename = @DefaultFile)
   #if !userChoice.nil?
   #  filename = userChoice
   #end
-  file = File.open(filename, "r")
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(',')
-      #@students << {name: name, cohort: cohort.to_sym}
-      add_students(name, cohort)
-    end
-  file.close
+  #file = File.open(filename, "r")
+    #file.readlines.each do |line|
+      #name, cohort = line.chomp.split(',')
+      ##@students << {name: name, cohort: cohort.to_sym}
+      #add_students(name, cohort)
+    #end
+  #file.close'''
+  #File.foreach(filename) { |line|
+  File.foreach(filename) do |line| 
+    name, cohort = line.chomp.split(',')
+    add_students(name, cohort)
+  end
   if @students.length > 0
     puts "Students successfully loaded from file\n"
   end
