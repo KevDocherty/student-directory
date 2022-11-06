@@ -1,5 +1,5 @@
 @students = []
-DefaultFile = "students.csv"
+@DefaultFile = "students.csv"
 
 def print_menu
   puts "1. Input the students"
@@ -24,6 +24,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "Students successfully added to file.\n"
 end
 
 def add_students(name, cohort)
@@ -39,13 +40,16 @@ def load_students(filename = "students.csv")
       add_students(name, cohort)
     end
   file.close
+  if @students.length > 0
+    puts "Students successfully loaded from file\n"
+  end
 end
 
 def try_load_students
   filename = ARGV.first # first argument from the command line
   #return if filename.nil? # exit out of method if no filename provided
   if filename.nil?
-    filename = DefaultFile
+    filename = @DefaultFile
   end
   if File.exist?(filename)
     load_students(filename)
@@ -189,7 +193,6 @@ end
 def print_students_by_cohort
   cohorts = []
   @students.each do |student|
-  
     cohort = student[:cohort].to_s
     if !cohorts.include? cohort
       cohorts << cohort
