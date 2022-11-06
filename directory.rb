@@ -51,7 +51,8 @@ end
 def process(selection)
   case selection
     when "1"
-      @students = input_students
+      #@students = input_students
+      input_students
     when "2"
       show_students
     when "3"
@@ -68,10 +69,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    #selection = STDIN.gets.chomp
-    #puts "selection = #{selection}"
     process(STDIN.gets.chomp)
-    #process(selection)
     puts "\n"
   end
 end
@@ -99,7 +97,7 @@ def input_students
   puts "Here enter the names and cohort of a student"
   puts "To finish, just hit <return> twice"
   # create an empty array
-  students = []
+  #students = []
   while true do
     puts "Please enter the name of a student"
     name = STDIN.gets.chomp
@@ -112,14 +110,14 @@ def input_students
       cohort = "nov".to_sym()
     end
     # add the student hash to the array
-    students << {name: name, cohort: cohort}
-    if students.length == 1
+    @students << {name: name, cohort: cohort}
+    if @students.length == 1
       puts "Now we have 1 student"
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{@students.count} students"
     end
   end
-  return students
+  #return students
 end
 
 def subset_students
