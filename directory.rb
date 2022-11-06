@@ -1,4 +1,5 @@
 @students = []
+DefaultFile = "students.csv"
 
 def print_menu
   puts "1. Input the students"
@@ -25,24 +26,35 @@ def save_students
   file.close
 end
 
+def add_students(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def load_students(filename = "students.csv")
   #file = File.open("students.csv", "r")
   file = File.open(filename, "r")
     file.readlines.each do |line|
       name, cohort = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym}
+      #@students << {name: name, cohort: cohort.to_sym}
+      add_students(name, cohort)
     end
   file.close
 end
 
 def try_load_students
   filename = ARGV.first # first argument from the command line
-  return if filename.nil? # exit out of method if no filename provided
+  #return if filename.nil? # exit out of method if no filename provided
+  if filename.nil?
+    filename = DefaultFile
+  end
   if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}\n"
+    puts "Loaded #{@students.count} from #{filename}\n\n"
   else
     puts "\nSorry #{filename} doesn't exist!\n\n"
+    #puts DefaultFile
+    #load_students(DefaultFile)
+    #puts "Students loaded from #{filename}\n"
     #exit
     return
   end
@@ -105,12 +117,15 @@ def input_students
       break
     end
     puts "And, their cohort?"
-    cohort = STDIN.gets.chomp.to_sym()
+    #cohort = STDIN.gets.chomp.to_sym()
+    cohort = STDIN.gets.chomp
     if cohort.empty?
-      cohort = "nov".to_sym()
+      #cohort = "nov".to_sym()
+      cohort = "nov"
     end
     # add the student hash to the array
-    @students << {name: name, cohort: cohort}
+    #@students << {name: name, cohort: cohort}
+    add_students(name, cohort)
     if @students.length == 1
       puts "Now we have 1 student"
     else
