@@ -4,8 +4,8 @@
 def print_menu
   puts "1. Input the students"
   puts "2. Display the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the students from students.csv"
+  puts "3. Save the list to a file"
+  puts "4. Load the students from a file"
   puts "9. Exit"
   puts "\n"
 end
@@ -16,8 +16,16 @@ def show_students
   print_footer
 end
 
+def get_filename
+  puts "Enter the filename including its extension: "
+  #filename = gets.chomp
+  @DefaultFile = gets.chomp
+  #return filename
+end
+
 def save_students
-  file = File.open("students.csv", "w")
+  #filename = get_filename
+  file = File.open(@DefaultFile, "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(", ")
@@ -31,8 +39,15 @@ def add_students(name, cohort)
   @students << {name: name, cohort: cohort.to_sym}
 end
 
-def load_students(filename = "students.csv")
+#def load_students(filename = "students.csv")
+def load_students(filename = @DefaultFile)
   #file = File.open("students.csv", "r")
+  #if filename.nil?
+  #userChoice = get_filename
+  #end
+  #if !userChoice.nil?
+  #  filename = userChoice
+  #end
   file = File.open(filename, "r")
     file.readlines.each do |line|
       name, cohort = line.chomp.split(',')
@@ -72,8 +87,10 @@ def process(selection)
     when "2"
       show_students
     when "3"
+      get_filename
       save_students
     when "4"
+      get_filename
       load_students
     when "9"
       exit
