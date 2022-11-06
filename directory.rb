@@ -27,13 +27,15 @@ def save_students
   #filename = get_filename
   filename = @DefaultFile
   #file = File.open(@DefaultFile, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    new_line = student_data.join(", ")
+  CSV.open(filename, "wb") do |csv|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      new_line = student_data.join(", ")
     #file.puts csv_line
-    File.write(filename, new_line + "\n", mode: 'a')
+      #File.write(filename, new_line + "\n", mode: 'a')
+      csv << new_line
     #File.write(filename, "\n")
-  end
+    end
   #file.close
   #File.foreach(filename) do 
    # @students.each do |student|
@@ -43,7 +45,7 @@ def save_students
       #filename.puts csv_line
     #end
   #end
-  #end
+  end
   puts "Students successfully added to file.\n"
 end
 
@@ -260,5 +262,6 @@ end
 #print_students_by_cohort(student_subset)
 #print_footer(student_subset)
 
+require 'csv'
 try_load_students
 interactive_menu
